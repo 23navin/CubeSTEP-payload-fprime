@@ -13,23 +13,21 @@ module Payload {
         rawTemp: tempData
         rawBatt: I8
         heaterWatt: heaterData
-        Tc: Fw.Time @< see sdd.md
-    } \
+    }
 
     @ Type for experiment result data
     struct ExpResult {
         rawTemp: tempData
         rawBatt: I8
         heaterWatt: heaterData
-        Tc: Fw.Time @< see sdd.md
-    } \
+    }
 
     @ Type for experiment parameters
     struct ExpParams {
         expLength: U8
         expWattInt: tcWatt
         expWattDec: tcWatt
-    } \
+    }
 
     @ Component for processing raw temperature data
     active component PLController {
@@ -38,7 +36,7 @@ module Payload {
         # ----------------------------------------------------------------------
 
         @ Sends experiment result data to be processed
-        input port TemperatureData: ExpResult
+        sync input port TemperatureData: tempData
 
         @ Port that reads data from ESP32
         output port read: Drv.I2c
@@ -89,7 +87,7 @@ module Payload {
 
         @ Command to configure the experiment parameters
         async command ExpConfig (
-            expParams: expParams @< Experiment parameters
+            expParams: ExpParams @< Experiment parameters
         ) \
         opcode 0x03
 
@@ -114,17 +112,13 @@ module Payload {
         format "Payload experiment of {} minutes completed successfully"
 
         @ Event for when the payload sends a status update
-        event PayloadUpdates(
-            statusUpdate: StatusUpdate @< status update data
-        ) \
+        event PayloadUpdates() \
         severity activity low \
         id 1 \
         format "Payload update received"
 
         @ Event for high temperature
-        event PayloadOverheat(
-            tempData: tempData @< all temperature values
-        ) \
+        event PayloadOverheat() \
         severity warning high \
         id 2 \
         format "High payload temperatures"

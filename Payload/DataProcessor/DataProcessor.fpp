@@ -1,70 +1,73 @@
-module DataProcessor {
+module Payload {
 
-    @ Component for processing raw temperature data
-    active component ImageProcessor {
-        # ----------------------------------------------------------------------
-        # General ports
-        # ----------------------------------------------------------------------
+enum TemperatureScale { Fahrenheit = 0, Celsius = 1 }
 
-        @ Save temperature data to logger
-        output port postProcess: Fw.BufferSend  @< postProcess -> send temperature data to buffer
+  @ Component for processing raw temperature data
+  active component DataProcessor {
+    # ----------------------------------------------------------------------
+    # General ports
+    # ----------------------------------------------------------------------
 
-        @ Image data to be processed
-        async input port preProcess: tempData @< preProcess -> find temperature data
+    @ Save temperature data to logger
+    output port postProcess: Fw.BufferSend  @< postProcess -> send temperature data to buffer
 
-        # ----------------------------------------------------------------------
-        # Special ports
-        # ----------------------------------------------------------------------
+    @ Image data to be processed
+    async input port preProcess: tempData @< preProcess -> find temperature data
 
-        @ Command receive
-        command recv port cmdIn
+    # ----------------------------------------------------------------------
+    # Special ports
+    # ----------------------------------------------------------------------
 
-        @ Command registration
-        command reg port cmdRegOut
+    @ Command receive
+    command recv port cmdIn
 
-        @ Command response
-        command resp port cmdResponseOut
+    @ Command registration
+    command reg port cmdRegOut
 
-        @ Port for emitting events
-        event port Log
+    @ Command response
+    command resp port cmdResponseOut
 
-        @ Port for emitting text events
-        text event port LogText
+    @ Port for emitting events
+    event port Log
 
-        @ Port for getting the time
-        time get port Time
+    @ Port for emitting text events
+    text event port LogText
 
-        @ Telemetry port
-        telemetry port Tlm
+    @ Port for getting the time
+    time get port Time
 
-        # ----------------------------------------------------------------------
-        # Commands
-        # ----------------------------------------------------------------------
+    @ Telemetry port
+    telemetry port Tlm
 
-        @ Set the format to convert to from raw image file
-        async command SetFormat(
-            fileFormat: FileFormat @< Type of file format to convert to
-            ) \
-        opcode 0x01
+    # ----------------------------------------------------------------------
+    # Commands
+    # ----------------------------------------------------------------------
 
-        # ----------------------------------------------------------------------
-        # Events
-        # ----------------------------------------------------------------------
-
-        @ Event bad buffer size
-        event BadBufferSize(
-            encodeSize: U32 @< Size of allocated buffer to store output buffer from imencode
-            bufferSize: U32 @< Size of output buffer from imencode
+    @ Set the format to convert to from raw image file
+    async command SetTemperatureScale(
+        temperatureScale: TemperatureScale @< Type of temperature scale to output
         ) \
-        severity warning high \
-        format "Encode buffer of size {} is smaller than buffer of size {}"
+    opcode 0x01
 
-        # ----------------------------------------------------------------------
-        # Telemetry
-        # ----------------------------------------------------------------------
+    # ----------------------------------------------------------------------
+    # Events
+    # ----------------------------------------------------------------------
 
-        @ Total number of experiments completed
-        telemetry dataProcessed: U32 id 0 update on change
+    @ Event bad buffer size
+    event BadBufferSize(
+        encodeSize: U32 @< Size of allocated buffer to store output buffer from imencode
+        bufferSize: U32 @< Size of output buffer from imencode
+    ) \
+    severity warning high \
+    format "Encode buffer of size {} is smaller than buffer of size {}"
 
-    }
+    # ----------------------------------------------------------------------
+    # Telemetry
+    # ----------------------------------------------------------------------
+
+    @ Total number of experiments completed
+    telemetry dataProcessed: U32 id 0 update on change
+
+  }
+
 }

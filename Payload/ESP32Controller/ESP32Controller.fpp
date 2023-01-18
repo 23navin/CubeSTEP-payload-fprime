@@ -1,10 +1,16 @@
-module ESP32Controller {
-    enum ExperimentState {Inactive, Active}
+module Payload {
+  enum ExperimentState { Inactive, Active }
+  
+  @ Type used for telemetry for 16 temp sensors
+  array TempData = [16] U32
 
-    @ Type used for telemetry for 16 temp sensors
-    array TempData = [16] U32
+  @ Component to control experiment processor and collect temperature data
+  active component ESP32Controller {
 
-    # General Ports
+    # ----------------------------------------------------------------------
+    # General ports
+    # ----------------------------------------------------------------------
+
     @ Sends temperature data to another component to be processed
     output port process: tempData
 
@@ -14,7 +20,10 @@ module ESP32Controller {
     @ Port that writes data to ESP32
     output port write: Drv.I2c
 
-    # Special Ports
+    # ----------------------------------------------------------------------
+    # Special ports
+    # ----------------------------------------------------------------------
+
     @ Command receive
     command recv port cmdIn
 
@@ -36,14 +45,20 @@ module ESP32Controller {
     @ Telemetry Port
     telemetry port Tlm
 
+    # ----------------------------------------------------------------------
     # Commands
+    # ----------------------------------------------------------------------
+
     @ Command to start the ESP32
-    guarded command ExperimentState(
+    async command ExperimentState(
         experimentState: ExperimentState
     ) \
     opcode 0x01
 
+    # ----------------------------------------------------------------------
     # Events
+    # ----------------------------------------------------------------------
+
     @ Report Experiment State
     event ExperimentStatus(
         experimentStatus: ExperimentState
@@ -72,6 +87,13 @@ module ESP32Controller {
     severity warning high \
     format "I2C Error: Power mode failed to set up with code {}"
 
+    # ----------------------------------------------------------------------
     # Telemetry
+    # ----------------------------------------------------------------------
+
     @ TempData from ESP32
     telemetry tempData: TempData id 0 update on change
+
+  }
+
+}

@@ -1,5 +1,5 @@
 \page PayloadPLControllerComponent Payload::PLController Component
-# Gnc::Imu (Passive Component)
+# Payload::PLController (Active Component)
 
 ## 1. Introduction
 `Gnc::Imu` is an F' passive component that collects data from the MPU6050 6-DoF Accelerometer and Gyro. 

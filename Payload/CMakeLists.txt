@@ -40,9 +40,7 @@ include("${FPRIME_FRAMEWORK_PATH}/cmake/FPrime-Code.cmake")
 ##
 
 # Add Topology subdirectory
-add_fprime_subdirectory("${CMAKE_CURRENT_LIST_DIR}/DataProcessor/")
-add_fprime_subdirectory("${CMAKE_CURRENT_LIST_DIR}/ESP32Controller/")
-add_fprime_subdirectory("${CMAKE_CURRENT_LIST_DIR}/TempDataPort/")
+add_fprime_subdirectory("${CMAKE_CURRENT_LIST_DIR}/PLController/")
 set(SOURCE_FILES "${CMAKE_CURRENT_LIST_DIR}/Top/Main.cpp")
 set(MOD_DEPS ${PROJECT_NAME}/Top)
 

@@ -139,7 +139,7 @@ module Payload {
         id 4 \
         format "Sensor {} not functioning correctly"
 
-        @ I2C Configuation Failed
+        @ I2C Configuration Failed
         event I2cTelemetryError(
             writeStatus: Drv.I2cStatus
         ) \
@@ -147,7 +147,7 @@ module Payload {
         id 5 \
         format "I2C Error: Telemetry request failed with code {}"
 
-        @ I2C Configuation Failed
+        @ I2C Configuration Failed
         event I2cConfigError(
             writeStatus: Drv.I2cStatus
         ) \

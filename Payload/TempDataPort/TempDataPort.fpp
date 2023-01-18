@@ -1,4 +1,4 @@
-module TempDataPort {
+module Payload {
     struct TemperatureData{
         Temp_Far: [16] I32 @< 32 signed bit for temperature Fahrenheit
         Temp_Cel: [16] I32 @< 32 signed bit for temperature Celsius

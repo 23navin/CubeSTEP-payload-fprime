@@ -1,14 +1,14 @@
 ####
 # 'SystemReference' Deployment:
 #
-# This sets up the build for the 'SystemRef' Application, including the custom >
-# components. In addition, it imports FPrime.cmake, which includes the core F P>
+# This sets up the build for the 'SystemRef' Application, including the custom reference
+# components. In addition, it imports FPrime.cmake, which includes the core F Prime
 # components.
 #
 # This file has several sections.
 #
 # 1. Header Section: define basic properties of the build
-# 2. F prime core: includes all F prime core components, and build-system prope>
+# 2. F prime core: includes all F prime core components, and build-system properties
 # 3. Local subdirectories: contains all deployment specific directory additions
 ####
 
@@ -25,7 +25,7 @@ project(SystemReference VERSION 1.0.0 LANGUAGES C CXX)
 ##
 # Section 2: F prime Core
 #
-# This includes all of the F prime core components, and imports the make-system>
+# This includes all of the F prime core components, and imports the make-system. F prime core
 # components will be placed in the F-Prime binary subdirectory to keep them from
 # colliding with deployment specific items.
 ##
@@ -47,7 +47,3 @@ set(SOURCE_FILES "${CMAKE_CURRENT_LIST_DIR}/Top/Main.cpp")
 set(MOD_DEPS ${PROJECT_NAME}/Top)
 
 register_fprime_deployment()
-
-if (NOT DEFINED FPRIME_PRESCAN)
-	find_package(rclcpp QUIET)
-endif()

@@ -46,6 +46,7 @@ add_fprime_subdirectory("${CMAKE_CURRENT_LIST_DIR}/SignalGen/")
 add_fprime_subdirectory("${CMAKE_CURRENT_LIST_DIR}/TempDataPort/")
 add_fprime_subdirectory("${CMAKE_CURRENT_LIST_DIR}/ESP32Controller/")
 add_fprime_subdirectory("${CMAKE_CURRENT_LIST_DIR}/DataProcessor/")
+add_fprime_subdirectory("${CMAKE_CURRENT_LIST_DIR}/PLController/")
 
 # Add Topology subdirectory
 add_fprime_subdirectory("${CMAKE_CURRENT_LIST_DIR}/Top/")

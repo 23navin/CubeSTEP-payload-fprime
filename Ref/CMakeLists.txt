@@ -43,9 +43,10 @@ add_fprime_subdirectory("${CMAKE_CURRENT_LIST_DIR}/PingReceiver/")
 add_fprime_subdirectory("${CMAKE_CURRENT_LIST_DIR}/RecvBuffApp/")
 add_fprime_subdirectory("${CMAKE_CURRENT_LIST_DIR}/SendBuffApp/")
 add_fprime_subdirectory("${CMAKE_CURRENT_LIST_DIR}/SignalGen/")
-add_fprime_subdirectory("${CMAKE_CURRENT_LIST_DIR}/MathTypes/")
-add_fprime_subdirectory("${CMAKE_CURRENT_LIST_DIR}/MathPorts/")
-add_fprime_subdirectory("${CMAKE_CURRENT_LIST_DIR}/MathSender/")
+add_fprime_subdirectory("${CMAKE_CURRENT_LIST_DIR}/TempDataPort/")
+add_fprime_subdirectory("${CMAKE_CURRENT_LIST_DIR}/ESP32Controller/")
+add_fprime_subdirectory("${CMAKE_CURRENT_LIST_DIR}/DataProcessor/")
+add_fprime_subdirectory("${CMAKE_CURRENT_LIST_DIR}/PLController/")
 
 # Add Topology subdirectory
 add_fprime_subdirectory("${CMAKE_CURRENT_LIST_DIR}/Top/")

@@ -1,9 +1,11 @@
-module ESP32Controller {
-    enum ExperimentState {Inactive, Active}
+module Payload {
+  enum ExperimentState {Inactive, Active}
 
-    @ Type used for telemetry for 16 temp sensors
-    array TempData = [16] U32
+  @ Type used for telemetry for 16 temp sensors
+  array TempData = [16] U32
 
+  @ Component to control experiment processor and collect temperature data
+  active component ESP32Controller {
     # General Ports
     @ Sends temperature data to another component to be processed
     output port process: tempData
@@ -32,13 +34,13 @@ module ESP32Controller {
 
     @ Port for getting the time
     time get port Time
-
+    
     @ Telemetry Port
     telemetry port Tlm
 
     # Commands
     @ Command to start the ESP32
-    guarded command ExperimentState(
+    async command ExperimentState(
         experimentState: ExperimentState
     ) \
     opcode 0x01
@@ -75,3 +77,5 @@ module ESP32Controller {
     # Telemetry
     @ TempData from ESP32
     telemetry tempData: TempData id 0 update on change
+  }
+}

@@ -1,6 +1,6 @@
 // ======================================================================
 // \title  ESP32Controller.cpp
-// \author nelson
+// \author kana
 // \brief  cpp file for ESP32Controller component implementation class
 // ======================================================================
 
@@ -49,7 +49,35 @@ namespace Payload {
     )
   {
     // TODO
+    this->log_ACTIVITY_HI_ExperimentStatus(experimentState);
+    this->
     this->cmdResponse_out(opCode,cmdSeq,Fw::CmdResponse::OK);
+  }
+
+  // ----------------------------------------------------------------------
+  // Helper Functions
+  // ----------------------------------------------------------------------
+
+  Drv::I2cStatus ESP32Controller ::setupReadRegister(U8 reg) {
+    Fw::Buffer buffer(&reg, sizeof reg);
+    return this->write_out(0, m_i2cDevAddress, buffer);
+  }
+
+  Drv::I2cStatus ESP32Controller ::readRegisterBlock(U8 startRegister, Fw::Buffer& buffer) {
+    Drv::I2cStatus status;
+    status = this->setupReadRegister(startRegister);
+    if(status == Drv::I2cStatus::I2C_OK) {
+      status = this->read_out(0, m_i2cDevAddress, buffer);
+    }
+    return status;
+  }
+
+  void ESP32Controller ::config() {
+
+  }
+
+  void ESP32Controller ::power() {
+    
   }
 
 } // end namespace Payload
